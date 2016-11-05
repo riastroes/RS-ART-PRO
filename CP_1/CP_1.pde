@@ -9,7 +9,7 @@ App app;
 
 void setup() 
 {
-  size(8000, 8000, PDF, "CP Graphics I6.pdf");
+  size(8000, 8000, PDF, "CP Graphics I7.pdf");
   app = new App("CP Graphics I");
   background(255);
 }

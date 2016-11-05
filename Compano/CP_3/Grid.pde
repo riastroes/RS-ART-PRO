@@ -1,3 +1,7 @@
+/* Ria Stroes */
+/* @updated: 5 november 2016 */
+
+
 class Grid{
   int wmax;
   int hmax;
@@ -6,6 +10,31 @@ class Grid{
   float widthmargin, heightmargin;
   float lmargin, rmargin, tmargin, bmargin;
   PVector[] pos;
+  
+  Grid(float maxwidth, float maxheight, float cellwidth, float cellheight){
+    this.cellwidth = cellwidth;
+    this.cellheight = cellheight;
+    this.widthmargin = width - maxwidth;
+    this.heightmargin = height - maxheight;
+   
+    this.wmax = int((maxwidth-this.widthmargin)/this.cellwidth);
+    this.lmargin = (maxwidth - (this.wmax * this.cellwidth)) / 2;
+    this.rmargin = this.lmargin;
+    
+    this.hmax = int((maxheight- this.heightmargin)/this.cellheight);
+    this.tmargin = (maxheight - (this.hmax * this.cellheight))/2;
+    this.bmargin = this.tmargin;
+    
+    this.pos = new PVector[this.hmax * this.wmax];
+    float x, y;
+    for(int h = 0; h < this.hmax; h++){
+      for( int w = 0 ; w < this.wmax; w++){
+        x = this.lmargin + ( w * this.cellwidth) + (this.cellwidth/2);
+        y = this.tmargin + ( h * this.cellheight) + (this.cellheight/2);
+        this.pos[(h* this.wmax)+ w] = new PVector(x,y);
+      }
+    }
+  }
   
   Grid(float maxwidth, float maxheight, float cellwidth, float cellheight, float wmargin, float hmargin){
     this.cellwidth = cellwidth;
@@ -31,13 +60,7 @@ class Grid{
       }
     }  
   }
-  void show(){
-    noStroke();
-    fill(0);
-    for(PVector p : pos){
-      ellipse(p.x, p.y, 1,1);
-    }
-  }
+  
   void disorderSin(float force){
     PVector up = new PVector(0,-force);
     PVector down = new PVector(0,force);
@@ -118,6 +141,13 @@ class Grid{
   int getRandomIndex(){
     int a = int(random(this.pos.length));
     return a;
+  }
+  
+  void show(){
+    
+    for(PVector p : pos){
+      point(p.x, p.y);
+    }
   }
   
 }

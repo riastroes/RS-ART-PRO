@@ -34,7 +34,6 @@ class Graphics{
       curveVertex(this.p[0].x, this.p[0].y);
       curveVertex(this.p[1].x, this.p[1].y);
       curveVertex(this.p[2].x, this.p[2].y);
-     
     endShape();
   }
   

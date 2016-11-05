@@ -1,4 +1,4 @@
-class Palette{ //<>//
+class Palette{
   
   String name;
   String imgName;
@@ -78,7 +78,7 @@ class Palette{ //<>//
     
   } 
   
-  boolean checkColors(int min, int max, color acolor){
+  private boolean checkColors(int min, int max, color acolor){
     boolean found = false;
     for(int i = min; i < max; i++){
       if(this.colors[i] == acolor){

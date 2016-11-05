@@ -7,22 +7,19 @@ class Grid{
   int hmax;
   float cellwidth;
   float cellheight;
-  float widthmargin, heightmargin;
   float lmargin, rmargin, tmargin, bmargin;
   PVector[] pos;
   
   Grid(float maxwidth, float maxheight, float cellwidth, float cellheight){
     this.cellwidth = cellwidth;
     this.cellheight = cellheight;
-    this.widthmargin = width - maxwidth;
-    this.heightmargin = height - maxheight;
    
-    this.wmax = int((maxwidth-this.widthmargin)/this.cellwidth);
-    this.lmargin = (maxwidth - (this.wmax * this.cellwidth)) / 2;
+    this.wmax = int(maxwidth/this.cellwidth);
+    this.lmargin = (width - (this.wmax * this.cellwidth)) / 2;
     this.rmargin = this.lmargin;
     
-    this.hmax = int((maxheight- this.heightmargin)/this.cellheight);
-    this.tmargin = (maxheight - (this.hmax * this.cellheight))/2;
+    this.hmax = int(maxheight/this.cellheight);
+    this.tmargin = (height -(this.hmax * this.cellheight))/2;
     this.bmargin = this.tmargin;
     
     this.pos = new PVector[this.hmax * this.wmax];
@@ -36,30 +33,30 @@ class Grid{
     }
   }
   
-  Grid(float maxwidth, float maxheight, float cellwidth, float cellheight, float wmargin, float hmargin){
-    this.cellwidth = cellwidth;
-    this.cellheight = cellheight;
-    this.widthmargin = wmargin;
-    this.heightmargin = hmargin;
+  //Grid(float maxwidth, float maxheight, float cellwidth, float cellheight, float wmargin, float hmargin){
+  //  this.cellwidth = cellwidth;
+  //  this.cellheight = cellheight;
+  //  this.widthmargin = wmargin;
+  //  this.heightmargin = hmargin;
    
-    this.wmax = int((maxwidth- (2*wmargin))/this.cellwidth);
-    this.lmargin = (maxwidth - (this.wmax * this.cellwidth)) / 2;
-    this.rmargin = this.lmargin;
+  //  this.wmax = int((maxwidth- (2*wmargin))/this.cellwidth);
+  //  this.lmargin = (maxwidth - (this.wmax * this.cellwidth)) / 2;
+  //  this.rmargin = this.lmargin;
     
-    this.hmax = int((maxheight- (2*hmargin))/this.cellheight);
-    this.tmargin = (maxheight - (this.hmax * this.cellheight))/2;
-    this.bmargin = this.tmargin;
+  //  this.hmax = int((maxheight- (2*hmargin))/this.cellheight);
+  //  this.tmargin = (maxheight - (this.hmax * this.cellheight))/2;
+  //  this.bmargin = this.tmargin;
     
-    this.pos = new PVector[this.hmax * this.wmax];
-    float x, y;
-    for(int h = 0; h < this.hmax; h++){
-      for( int w = 0 ; w < this.wmax; w++){
-        x = this.lmargin + ( w * this.cellwidth) + (this.cellwidth/2);
-        y = this.tmargin + ( h * this.cellheight) + (this.cellheight/2);
-        this.pos[(h* this.wmax)+ w] = new PVector(x,y);
-      }
-    }  
-  }
+  //  this.pos = new PVector[this.hmax * this.wmax];
+  //  float x, y;
+  //  for(int h = 0; h < this.hmax; h++){
+  //    for( int w = 0 ; w < this.wmax; w++){
+  //      x = this.lmargin + ( w * this.cellwidth) + (this.cellwidth/2);
+  //      y = this.tmargin + ( h * this.cellheight) + (this.cellheight/2);
+  //      this.pos[(h* this.wmax)+ w] = new PVector(x,y);
+  //    }
+  //  }  
+  //}
   
   void disorderSin(float force){
     PVector up = new PVector(0,-force);
@@ -142,11 +139,32 @@ class Grid{
     int a = int(random(this.pos.length));
     return a;
   }
+  void projectOnCylinder(PVector center, float cylinderwidth, float cylinderheight){
+    
+    
+    PVector[] p = new PVector[this.wmax];
+    float anglestep = TWO_PI/this.wmax;
+    for(int i = 0; i < p.length; i++){
+      p[i] = new PVector(0,0);
+      p[i].x = center.x + ((cylinderwidth/2) * sin(anglestep * i));
+      p[i].y = center.y + ((cylinderheight/2) * cos(anglestep * i));
+    }
+    
+    
+    for(int h = 0; h < this.hmax; h++){
+      for( int w = 0 ; w < this.wmax; w++){
+        this.pos[(h* this.wmax)+ w].x =  p[w].x;
+        this.pos[(h* this.wmax)+ w].y = p[w].y + (h*this.cellheight);
+      }
+    } 
+  }
   
   void show(){
     
     for(PVector p : pos){
+      
       point(p.x, p.y);
+      
     }
   }
   

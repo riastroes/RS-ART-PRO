@@ -15,8 +15,7 @@ class App{
     //this.pal1.addRGBColors("paars.png", 4, 255);
     
     this.grid = new Grid(280, 280, 30,30);
-    //this.circle = new Circle(new PVector(2000, 2000),1500);
-    //this.graphics = new ArrayList<Graphics>();
+    
    
     this.init();
   }
@@ -26,8 +25,9 @@ class App{
   }
   void draw(){
     background(255);
-    stroke(this.pal1.colors[0]);
-    strokeWeight(10);
+    stroke(0);
+    strokeWeight(3);
+    this.grid.projectOnCylinder(new PVector((width/2),this.grid.tmargin), this.grid.wmax * this.grid.cellwidth, (this.grid.wmax * this.grid.cellwidth)/4);
     this.grid.show();
     
   }

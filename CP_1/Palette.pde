@@ -10,7 +10,7 @@ class Palette{
     this.name = name;
     this.colors = new color[0];
     
-  } //<>//
+  } //<>// //<>//
   
   void addRGBColors(String imgName, int maxColors, int alpha){
     PImage img = loadImage(imgName);

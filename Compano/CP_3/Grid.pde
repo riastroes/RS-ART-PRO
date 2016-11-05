@@ -108,15 +108,11 @@ class Grid{
       }
     }  
   }
-  void disorderMove(PVector move){
-    
-    
+  void move(PVector to){
+    PVector move = to.sub(this.pos[0]);
     for(int h = 0; h < this.hmax; h++){
       for( int w = 0 ; w < this.wmax; w++){
-        
-        
-          this.pos[(h* this.wmax)+ w].add(move);
-        
+          this.pos[(h* this.wmax)+ w].add(move);       
       }
     }  
   }

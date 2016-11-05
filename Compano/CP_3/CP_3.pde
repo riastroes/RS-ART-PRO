@@ -8,8 +8,10 @@ import processing.pdf.*;
 
 App app;
 void setup(){
-  size(800,800);
+  size(800,1600);
   app = new App("Compano 3");
+  
+  app.create3();
 
 }
 void draw(){

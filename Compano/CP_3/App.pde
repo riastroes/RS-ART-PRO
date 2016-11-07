@@ -20,8 +20,10 @@ class App{
    this.etage1 = new Etage(1,480, 480, 30,30);
    this.etage1.construct(new PVector(width/2, height-480));
    this.etage1.create(1);
-   this.etage2 = new Etage(2,480, 480, 30,30);
+   this.etage2 = new Etage(2,480, 480, 10,10);
    this.etage2.construct(new PVector(width/2, height-(2 *480)));
+   
+      
    this.etage2.create(2);
    this.etage3 = new Etage(3,480, 480, 30,30);
    this.etage3.construct(new PVector(width/2, height-(3 *480)));

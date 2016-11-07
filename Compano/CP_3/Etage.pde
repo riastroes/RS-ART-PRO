@@ -23,13 +23,15 @@ class Etage{
      }
     }
     else if(nr == 2){
-      for(int i = 0; i < this.grid.pos.length -1 -this.grid.wmax; i++){      
+      this.grid.disorderByVector(this.grid.pos[0],-50);
+      for(int i = 0; i < this.grid.pos.length-1 -this.grid.wmax; i++){      
        this.graphics.add(new Graphics(this.grid.pos[i],this.grid.pos[i+1],
        this.grid.pos[i+this.grid.wmax],this.grid.pos[i+this.grid.wmax+1]));
      }
-     this.grid.disorderByVector(this.grid.pos[0],20);
+     
     }
     else if(nr == 3){
+      this.grid.disorderByVector(this.grid.pos[3],50);
       for(int i = 0; i < this.grid.pos.length -3; i++){      
        this.graphics.add(new Graphics(this.grid.pos[i],this.grid.pos[i+1],this.grid.pos[i+2],this.grid.pos[i+3]));
      }

@@ -15,6 +15,11 @@ class Palette{
     this.colors = expand(this.colors, max + 1);
     this.colors[max] = acolor;
   }
+   void addColor(color acolor, int alpha){
+    int max = this.colors.length;
+    this.colors = expand(this.colors, max + 1);
+    this.colors[max] = color(acolor, alpha);  
+  }
   
   void addRGBColors(String imgName, int maxColors, int alpha){
     PImage img = loadImage(imgName);

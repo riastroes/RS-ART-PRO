@@ -29,8 +29,8 @@ class Grid{
     float x, y;
     for(int h = 0; h < this.hmax; h++){
       for( int w = 0 ; w < this.wmax; w++){
-        x = ( w * this.cellwidth) + (this.cellwidth/2);
-        y = ( h * this.cellheight) + (this.cellheight/2);
+        x = ( w * this.cellwidth);
+        y = ( h * this.cellheight);
         this.pos[(h* this.wmax)+ w] = new PVector(x,y);
         this.pos[(h* this.wmax)+ w].add(this.position);
       }
@@ -138,11 +138,11 @@ class Grid{
     this.cylinderheight = cylinderheight;
     
     PVector[] p = new PVector[this.wmax];
-    float anglestep = TWO_PI/this.wmax;
+    float anglestep = TWO_PI/(this.wmax-1);
     for(int i = 0; i < this.wmax; i++){
       p[i] = new PVector(0,0);
-      p[i].x = center.x + ((cylinderwidth/2) * sin(PI + anglestep * i));
-      p[i].y = center.y + ((cylinderheight/2) * cos(PI + anglestep * i));
+      p[i].x = this.center.x + ((this.cylinderwidth/2) * sin(PI - (anglestep * i)));
+      p[i].y = this.center.y + ((this.cylinderheight/2) * cos(PI - (anglestep * i)));
     }
     
     

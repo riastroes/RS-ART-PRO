@@ -19,7 +19,6 @@ class App{
     
     Arect = new ArrayList<Rect>();
     Arect.add( new Rect(new PVector((width/2)-400,0), 400, height-100, 39,100));
-   
     Arect.add( new Rect(new PVector((width/2)-400,0), 800, height-100, 79,100));
    
    
@@ -40,8 +39,8 @@ class App{
     stroke(this.pal1.colors[1]);
     s.grid.projectOnCylinder(new PVector(width/2, 80), 40, 40);
     s.grid.disorderByVector(new PVector(width/2,height/2),-90);
-    s.grid.disorderByVector(new PVector(width/2,height/4),90);
-    s.grid.disorderByVector(new PVector(width/2,height),-180);
+    s.grid.disorderByVector(new PVector(width/2,height/3),140);
+    s.grid.disorderByVector(new PVector(width/2,height-50),-180);
     for(int h = 10; h < 15; h++){
         s.grid.disorderRow(h, -90);
       }
@@ -50,7 +49,7 @@ class App{
     s.draw(); 
     
     
-    stroke(this.pal1.colors[0]);
+    
      
       r.grid.projectOnCylinder(new PVector(width/2, 80), width/2, 80);
       r.grid.disorderSin(2);
@@ -67,6 +66,7 @@ class App{
       
         r.grid.move(new PVector((width/2),120));
       
+      stroke(this.pal1.colors[0]);
       r.addGraphics();
      // r.draw();
       

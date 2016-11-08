@@ -82,21 +82,10 @@ class Graphics{
     this.p[8].y = pos3.y;
     
   }
-  public void texture9(){
-     beginShape();
-      
-       vertex(this.p[1].x, this.p[1].y);
-       vertex(this.p[2].x, this.p[2].y);
-       vertex(this.p[5].x, this.p[5].y);
-       vertex(this.p[7].x, this.p[7].y);
-       vertex(this.p[6].x, this.p[6].y);
-       vertex(this.p[3].x, this.p[3].y);
-       endShape(CLOSE);
-  }
   
-  public void texture9(String code, int c, color acolor){
-     int[] icode = int(split(code," "));
-     
+  
+  public void texture9(String code){
+     int[] icode = int(split(code," "));    
      beginShape();
        for(int i = 0; i < icode.length; i++)
        {

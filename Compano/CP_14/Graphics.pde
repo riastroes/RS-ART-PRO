@@ -96,8 +96,7 @@ class Graphics{
   
   public void texture9(String code, int c, color acolor){
      int[] icode = int(split(code," "));
-     stroke(acolor);
-     noFill();
+     
      beginShape();
        for(int i = 0; i < icode.length; i++)
        {

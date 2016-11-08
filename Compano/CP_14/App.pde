@@ -11,6 +11,7 @@ class App{
     this.name = name;
     this.pal1 = new Palette("gray");
     this.pal1.addColor(color(#000033));
+    this.pal1.addColor(color(#aa0000));
     this.pal1.addRGBColors("grijsblauw.png", 1, 255);
     this.pal1.addRGBColors("zw.png", 12,255);
     //this.pal1.addRGBColors("colors3.png", 2, 255);

@@ -89,10 +89,15 @@ class Rect{
    
     
    int c = 0;
+   int count = 0;
+   float t = 1.0 / this.graphics.size();
+   
+   noFill();
    for(Graphics g : this.graphics){
+     stroke(lerpColor(app.pal1.colors[1],app.pal1.colors[0],t*count));
      c = int(random(this.collection.size()));
      g.texture9(this.collection.get(0), c, app.pal1.colors[0]);
-     
+     count++;
    }
   }
 }

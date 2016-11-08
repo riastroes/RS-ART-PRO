@@ -5,12 +5,15 @@
 /* Big Graphics */
 
 import processing.pdf.*;
-
+boolean print;
 App app;
 void setup(){
-  size(1100,2000,PDF,"result/cp13-1.pdf");
+  print = true;
   //size(550,1000);
-  app = new App("Compano 13");
+  size(1100,2000,PDF,"result/cp14-1.pdf");
+  
+  
+  app = new App("Compano 14");
   
   
 
@@ -18,5 +21,7 @@ void setup(){
 void draw(){
   app.draw();
   noLoop();
+  if(print){
   exit();
+  }
 }

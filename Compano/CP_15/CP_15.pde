@@ -8,9 +8,9 @@ import processing.pdf.*;
 
 App app;
 void setup(){
-  //size(1100,2000,PDF,"result/cp14-1.pdf");
-  size(550,1000);
-  app = new App("Compano 14");
+  size(1100,2000,PDF,"result/cp15-1.pdf");
+  //size(550,1000);
+  app = new App("Compano 15");
   
   
 
@@ -18,5 +18,5 @@ void setup(){
 void draw(){
   app.draw();
   noLoop();
-  //exit();
+  exit();
 }

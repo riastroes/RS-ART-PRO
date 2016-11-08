@@ -8,7 +8,7 @@ import processing.pdf.*;
 
 App app;
 void setup(){
-  //size(1100,2000,PDF,"result/cp14-1.pdf");
+  //size(1100,2000,PDF,"result/cp16-1.pdf");
   size(550,1000);
   app = new App("Compano 14");
   

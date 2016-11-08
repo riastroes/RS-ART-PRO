@@ -40,11 +40,12 @@ class App{
     stroke(this.pal1.colors[1]);
     s.grid.projectOnCylinder(new PVector(width/2, 80), 40, 40);
     s.grid.disorderByVector(new PVector(width/2,height/2),-90);
-    s.grid.disorderByVector(new PVector(width/2,height/4),70);
-    s.grid.disorderByVector(new PVector(width/2,height/5*4),-180);
+    s.grid.disorderByVector(new PVector(width/2,height/4),90);
+    s.grid.disorderByVector(new PVector(width/2,height),-180);
     for(int h = 10; h < 15; h++){
         s.grid.disorderRow(h, -90);
       }
+    s.grid.move(new PVector(width/2,30));
     s.addGraphics();
     s.draw(); 
     
@@ -72,7 +73,7 @@ class App{
     
     
     
-     //<>//
+     //<>// //<>//
     
   }
   

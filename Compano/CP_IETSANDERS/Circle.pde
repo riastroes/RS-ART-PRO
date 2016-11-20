@@ -11,26 +11,25 @@ class Circle{
    this.hsize = hsize;
  
  }
- void lines(float angle){
+ void drawLine(float fromAngle, float toAngle){
   
    PVector p1 = this.pos.copy();
    PVector p2 = this.pos.copy();
    
-   for(int i = 0; i < PI; i += angle){
-      p1.x = this.pos.x + (this.wsize * sin(i));
-      p1.y = this.pos.y + (this.hsize * cos(i));
-      
-      p2.x = this.pos.x - (this.wsize * sin(i));
-      p2.y = this.pos.y - (this.hsize * cos(i));
-      stroke(0);
-      strokeWeight(1);
-      line(p1.x, p1.y, p2.x, p2.y);
-      println(p1.x + " " +  p1.y+ " " +  p2.x+ " " +  p2.y);
-      println(i);
-   }
+  
+  p1.x = this.pos.x + (this.wsize * sin(fromAngle));
+  p1.y = this.pos.y + (this.hsize * cos(fromAngle));
+  
+  p2.x = this.pos.x - (this.wsize * sin(toAngle));
+  p2.y = this.pos.y - (this.hsize * cos(toAngle));
+  
+  vertex(p1.x, p1.y);
+  vertex(p2.x, p2.y);
+     
+   
  }
  
  void draw(){
-   this.lines(0.03);
+   
  }
 }

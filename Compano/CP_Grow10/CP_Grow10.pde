@@ -12,8 +12,8 @@ float ut;
 
 
 void setup(){
-  size(2800,2000);
-  beginRecord(PDF, "result/grow9-1.pdf"); 
+  size(4500,3500);
+  beginRecord(PDF, "result/grow10-2.pdf"); 
   background(0,0,25);
   
   ut = 400;
@@ -69,8 +69,8 @@ void createKwal(Circle[] circles){
   
   for(int i = 0; i < circles.length; i++){
     PVector center = new PVector(0,0);
-    center.y +=((ut/random(3,5))* i);
-    circles[i] = new Circle(center,random(-ut*0.1,ut*0.1), PI,random(-PI/3, PI/3));
+    center.y +=((ut/random(3,20))* i);
+    circles[i] = new Circle(center,random(-ut*0.08,ut*0.08), PI,random(-PI/3, PI/3));
     circles[i].add(PI/8,16);
   }
 
@@ -86,7 +86,7 @@ void drawKwal(Circle[] circles, PVector pos ){
        for(int c = 0; c < circles[0].a.size(); c++){
            
            for(int i = 0; i < circles.length; i+=2){
-           color acolor = lerpColor(color(255,10), color(255,255,200), i/circles.length);
+           color acolor = lerpColor(color(0,50,0,20), color(255,255,200,20), i/circles.length);
            fill(acolor);
            curveVertex(circles[i].a.get(c).x, circles[i].a.get(c).y);
            }

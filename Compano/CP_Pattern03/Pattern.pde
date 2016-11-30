@@ -54,7 +54,7 @@ class Pattern{
         curveVertex(this.grid.get(57).x, this.grid.get(57).y) ;  
         curveVertex(this.grid.get(20).x, this.grid.get(20).y) ; 
        endShape();
-        ellipse(this.grid.get(4).x, this.grid.get(4).y, 30,30);
+        
     popMatrix();
   }
     

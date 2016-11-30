@@ -91,6 +91,7 @@ class Pattern{
       
       stroke(pal2.colors[3]);
       fill(pal1.colors[3]);
+<<<<<<< HEAD
       drawPattern4();
       
       stroke(pal2.colors[4]);
@@ -98,6 +99,44 @@ class Pattern{
       drawPattern5();
       
       
+=======
+      strokeWeight(1);
+      beginShape();
+        curveVertex(this.grid.get(2).x, this.grid.get(2).y) ;  
+        curveVertex(this.grid.get(0).x, this.grid.get(0).y) ; 
+        curveVertex(this.grid.get(19).x, this.grid.get(19).y) ; 
+        curveVertex(this.grid.get(24).x, this.grid.get(24).y) ;    
+        curveVertex(this.grid.get(21).x, this.grid.get(21).y) ;    
+        curveVertex(this.grid.get(2).x, this.grid.get(2).y) ;  
+        curveVertex(this.grid.get(0).x, this.grid.get(0).y) ; 
+        curveVertex(this.grid.get(19).x, this.grid.get(19).y) ; 
+      endShape();
+      
+       fill(pal2.colors[0]);
+       stroke(pal2.colors[0]);
+       strokeWeight(1);
+       beginShape();
+        vertex(this.grid.get(2).x, this.grid.get(2).y) ;  
+        vertex(this.grid.get(0).x, this.grid.get(0).y) ; 
+        vertex(this.grid.get(12).x, this.grid.get(12).y) ;    
+        vertex(this.grid.get(14).x, this.grid.get(31).y) ;    
+        vertex(this.grid.get(2).x, this.grid.get(2).y) ;  
+        vertex(this.grid.get(0).x, this.grid.get(0).y) ; 
+       endShape();
+       
+       fill(pal2.colors[1]);
+       stroke(pal1.colors[3]);
+       strokeWeight(1);
+       beginShape();
+        curveVertex(this.grid.get(35).x, this.grid.get(35).y) ;  
+        curveVertex(this.grid.get(57).x, this.grid.get(57).y) ; 
+        curveVertex(this.grid.get(20).x, this.grid.get(20).y) ;    
+        curveVertex(this.grid.get(35).x, this.grid.get(35).y) ;    
+        curveVertex(this.grid.get(57).x, this.grid.get(57).y) ;  
+        curveVertex(this.grid.get(20).x, this.grid.get(20).y) ; 
+       endShape();
+       
+>>>>>>> origin/master
     popMatrix();
   }
     

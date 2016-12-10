@@ -157,7 +157,11 @@ class Grid2{
   void show(){
     
     for(PVector p : pos){
-      
+      float m = map(p.x, 0,width,0,255);
+      m = constrain(m, 0, 255);
+      stroke(0,200,0,m);
+     
+      strokeWeight(m /5);
       point(p.x, p.y);
       
     }

@@ -1,59 +1,111 @@
-Letter[] letters1, letters2, letters3;
+ //<>//
+//COMPANO
+//Code tree
+//6 december 2016
+//ria stroes
+import processing.pdf.*;
+
+Letter[][] letters;
 PVector[] pos;
-int[] alphabet={1,2,3,4,6,7,8,9,12,14,15,18,19,20,21};
-int[] code;
-Grid2 grid1;
-Grid2 grid2;
-Grid2 grid3;
+Grid2 grid;
+
+String[] c;
+Code code;
 
 void setup(){
-  size(800,800);
-  background(0);
+  size(1100,1300);
+  beginRecord(PDF, "result/codetree.pdf");
+  background(0,0,50);
+  code = new Code(); //<>//
+  c = new String[10];
+  grid = new Grid2(new PVector(0,0), width-100,225,75,10); //<>//
+  grid.disorderSin(2);
+  grid.disorderByVector(new PVector(width-100,100),-200);
+  //grid.disorderByVector(new PVector(width,150),-200);
+  // grid.disorderByVector(new PVector(width,50),-200);
+  letters = new Letter[10][100];
   
-  grid1 = new Grid2(new PVector(0,0),width, height/4*3, 10, 30);
-  grid1.projectOnCylinder(new PVector(width/4,75), 50, 30);
-  grid1.disorderRow(5,10);
-  grid1.disorderRow(10,20);
-  grid1.disorderRow(20,30);
-  grid2 = new Grid2(new PVector(0,0),width, height/3*2, 30, 30);
-  grid2.projectOnCylinder(new PVector(width/2,50), 100, 50);
-  grid2.disorderRow(5,5);
-  grid2.disorderRow(7,10);
-  grid2.disorderRow(15,30);
-  grid2.disorderRow(16,30);
-  grid2.disorderRow(17,30);
-  grid2.disorderRow(18,30);
-  grid3 = new Grid2(new PVector(0,0),width, height/3*2, 20, 30);
-  grid3.projectOnCylinder(new PVector(width/4*3,150), 100, 50);
+  for(int i = 0; i < 10; i++){
+    //Grid2(PVector pos, float maxwidth, float maxheight, int wmax, int hmax)
+    
+    
+    c[i]= code.code[i];
+    letters[i] = new Letter[c[i].length()];
+    for(int l = 0; l < c[i].length(); l++){
+      letters[i][l] = new Letter(grid.pos[l+ (i * 75)],15,25, (int)c[i].charAt(l%c[i].length()));
+    }
+  }
   
-  String code1= "ABA";
-  String code2 = "STRING";
-  String code3= "FLOAT";
-   
-  letters1 = new Letter[grid1.pos.length];
-  for(int i = 0; i < grid1.pos.length; i++){
-    letters1[i] = new Letter(grid1.pos[i],12,14, 5,7, (int)code1.charAt(i%3)-64);
-  }
-  letters2 = new Letter[grid2.pos.length];
-  for(int i = 0; i < grid2.pos.length; i++){
-    letters2[i] = new Letter(grid2.pos[i],12,14, 5,7, (int)code2.charAt(i%6)-64);
-  }
-  letters3 = new Letter[grid3.pos.length];
-  for(int i = 0; i < grid3.pos.length; i++){
-    letters3[i] = new Letter(grid3.pos[i],12,14, 5,7, (int)code3.charAt(i%5)-64);
-  }
-  fill(255);
-  stroke(0,0,55);
-  strokeWeight(0.1);
+  //for(int i = 0; i < 10; i++){
+  //  grids[i] = new Grid2(new PVector(0,i*40), width, 40, 80,1);
+  //  c[i]= code.code[i];
+  //  letters[i] = new Letter[grids[i].pos.length];
+  //  for(int l = 0; l < grids[i].pos.length; l++){
+  //    letters[i][l] = new Letter(grids[i].pos[l],15,25, (int)c[i].charAt(l%c[i].length()));
+  //  }
+  //}
+  
+ 
+ // //fill(255,0,0);
+ // noFill();
+ // //noStroke();
+ // stroke(255);
+ // strokeWeight(1);
+ // for(int i = 0; i < 10; i++){
+ //   grids[i].show();
+ // for(int l = 0; l < c[i].length(); l++){
+ //   letters[i][l].draw();
+ // }
+ // }
+  
+  drawCode(new PVector(width/2,height-180), 0.8, -1.5);
+  drawCode(new PVector((width/2)+100,height-300), 0.24, -1.6);
+  drawCode(new PVector((width/2)-25,height-325), 0.2, -1);
+  drawCode(new PVector(width/2,height-375), 0.4, -1.7);
+  
+  drawCode(new PVector((width/2)+30,height-600), 1, -1);
+  drawCode(new PVector((width/2)+50,height-640), 0.3, -2);
+  
+  drawCode(new PVector((width/2)-200,height-870), 0.6, -1.6);
+  drawCode(new PVector((width/2)+50,height-1030), 0.7, -0.9);
+  
+  drawCode(new PVector((width/2)+180,height-800), 0.4, 0);
+  drawCode(new PVector((width/2)+0,height-1100), 0.3, -2.2);
+  
+  drawCode(new PVector((width/2)-340,height-860), 0.3, -1.5);
+  drawCode(new PVector((width/2)-200,height-550), 0.8, -2.5);
+  
+  
+  drawCode(new PVector((width/2)-100,height-50), 0.4, PI);
+  drawCode(new PVector((width/2)+250,height-150), 0.3, 0);
+  noLoop();
+  endRecord();
 }
-void draw(){
-  for(int i = 0; i < grid1.pos.length; i++){
-    letters1[i].draw();
+
+void drawCode(PVector pos, float scale, float rot){
+  fill(255);
+ 
+  //stroke(255);
+  //strokeWeight(1);
+  pushMatrix();
+  translate(pos.x, pos.y);
+  rotate( rot);
+  scale( scale);
+ 
+  grid.show();
+  noStroke();
+  for(int i = 0; i < 10; i++){
+  
+  for(int l = 0; l < c[i].length(); l++){
+    
+    if(letters[i][l].nr == 73){
+      fill(255,191,0);
+    }
+    letters[i][l].draw();
+    if(letters[i][l].nr == 120){
+      fill(255);
+    }
   }
-  for(int i = 0; i < grid2.pos.length; i++){
-    letters2[i].draw();
   }
-  for(int i = 0; i < grid3.pos.length; i++){
-    letters3[i].draw();
-  }
+  popMatrix();
 }

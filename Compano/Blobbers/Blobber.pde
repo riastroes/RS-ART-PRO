@@ -137,10 +137,20 @@ class Blobber {
   void showPoint(int id) {
 
     pushMatrix();
-    translate(this.position.x, this.position.y);
+    translate(this.center.x, this.center.y);
     scale(this.factor);
     rotate(this.rot);
     ellipse(this.pos.get(id).x, this.pos.get(id).y, 10, 10);
+
+    popMatrix();
+  };
+  void lineOnBlob(int id) {
+    int zid = this.pos.size() - id;
+    pushMatrix();
+    translate(this.center.x, this.center.y);
+    scale(this.factor);
+    rotate(this.rot);
+    line(this.pos.get(id).x, this.pos.get(id).y, this.pos.get(zid).x, this.pos.get(zid).y);
 
     popMatrix();
   };

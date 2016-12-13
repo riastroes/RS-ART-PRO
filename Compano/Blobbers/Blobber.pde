@@ -62,31 +62,31 @@ class Blobber {
 
 
     PVector p;
-    float r = random(TWO_PI/(corners+1));
+    float r = 0;//random(TWO_PI/(corners+1));
     for (int i = 0; i < corners; i += 1) {
       float wradius = random(wminradius, wmaxradius);
       float hradius = random(hminradius, hmaxradius);
-      p = posOnEllipse(this.center, wradius, hradius, this.corners, (i * (TWO_PI/(corners))) +  r);
+      p = posOnEllipse(this.center, wradius, hradius,  (i * (TWO_PI/(corners))) +  r);
       this.pos.add(p);
     }
     
   };
-  PVector posOnEllipse(PVector center, float wradius, float hradius, int corners, float angle) {
+  PVector posOnEllipse(PVector center, float wradius, float hradius,  float angle) {
     PVector p = center.copy();
     p.x = wradius * sin(angle);
     p.y = hradius * cos(angle);
 
     return p;
   }
-  void change(){
-    if(this.minwidth > 0 && this.minwidth < width){this.minwidth += 1;}
-    if(this.maxwidth > 0 && this.maxwidth < width){this.maxwidth += 1;}
-    if(this.minheight > 0 && this.minheight < width){this.minheight += 1;}
-    if(this.maxheight > 0 && this.maxheight < width){this.maxheight += 1;}
+  void change(int corners, float radius){
+    if(this.minwidth > radius && this.minwidth < width){this.minwidth -= 1;}
+    if(this.maxwidth > radius && this.maxwidth < width){this.maxwidth += 1;}
+    if(this.minheight > radius && this.minheight < width){this.minheight -= 1;}
+    if(this.maxheight > radius && this.maxheight < width){this.maxheight += 1;}
     
     
-    
-    init(this.center, this.corners, this.minwidth, this.maxwidth, this.minheight, this.maxheight);
+    this.corners = corners;
+    init(this.center, this.corners, radius, this.maxwidth, radius, this.maxheight);
     
   }
 
@@ -99,15 +99,15 @@ class Blobber {
     rotate(this.rot);
 
     int s = this.pos.size();
-    stroke(0);
-    fill(255,0,0,10);
-    strokeWeight(1);
+    
     beginShape();
-    for (int i = 0; i < s+3; i += 1) {
-      curveVertex(this.pos.get(i%s).x, this.pos.get(i%s).y);
-    }
+      for (int i = 0; i < s+3; i += 1) {
+        
+        curveVertex(this.pos.get(i%s).x, this.pos.get(i%s).y);
+      }
     endShape();
     popMatrix();
+    this.rot += 0.1;
     
   };
   void showCenter() {
@@ -145,7 +145,7 @@ class Blobber {
     popMatrix();
   };
   void lineOnBlob(int id) {
-    int zid = this.pos.size() - id;
+    int zid = (this.pos.size()/2) - id;
     pushMatrix();
     translate(this.center.x, this.center.y);
     scale(this.factor);

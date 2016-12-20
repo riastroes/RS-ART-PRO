@@ -34,21 +34,26 @@ class Worm {
   boolean live() {
     int step = 10;
     int last = this.body.get(this.body.size()-1);
-    int next = this.nextStep(last, step);
-    int x = next % width;
-    int y = int( next / width);
-    if (x >step && x < width-step) {
-      if (y > step && y < height-step) {
-        if ( world.eat(next)) {
-          this.set(next);
+    for(int s = 0; s < step; s++){
+      int next = this.nextStep(last, 1);
+      int x = next % width;
+      int y = int( next / width);
+      if (x >step && x < width-step) {
+        if (y > step && y < height-step) {
+          if ( world.eat(next)) {
+            this.set(next);
+          } else {
+            this.alive = false;
+            break;
+          }
         } else {
           this.alive = false;
+          break;
         }
       } else {
         this.alive = false;
+        break;
       }
-    } else {
-      this.alive = false;
     }
     return this.alive;
   }

@@ -29,7 +29,8 @@ class App{
     Arect.add( new Rect(new PVector(width*0.75,height*0.20), width/3, height*0.65, int(60 * this.u),int(100 * this.u)));
     Arect.add( new Rect(new PVector(width*0.85,height*0.45), width/4, height*0.50, int(40 * this.u),int(30 * this.u)));
     
-    this.u =3.5;
+    //this.u =3.5;
+    this.u =1;
     a = 60;
    frameRate(1);
     

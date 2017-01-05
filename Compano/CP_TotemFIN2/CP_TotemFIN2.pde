@@ -13,18 +13,19 @@ void setup(){
 //// size(4000*3.5, 2800*3.5);
   //size(14000, 9800);
 //
-  u = 3.5;
-  //u = 1;
+  //u = 3.5;
+  u = 1;
   app = new App("Compano Totems", u);
  
   
 
 }
 void draw(){
-  beginRecord(PDF, "result/totemflowers.jpg");
+  beginRecord(PDF, "result/totemflowers2.pdf");
   pushMatrix();
-  translate(875,700);
-  scale(0.9);
+  //translate(875,700);
+  translate(275,200);
+  scale(0.85);
   
   
   app.draw();

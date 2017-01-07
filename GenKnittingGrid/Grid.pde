@@ -24,19 +24,21 @@ class Grid{
     this.center = pos.copy();
     this.center.add(new PVector(maxwidth/2, maxheight/2));
     
-   
-    
+    println("cellwidth: " + this.cellwidth + " x " + this.wmax);
+    println("cellheight: " + this.cellheight+ " x " + this.hmax);
+       
     this.pos = new PVector[this.hmax * this.wmax];
     float x, y;
     for(int h = 0; h < this.hmax; h++){
       for( int w = 0 ; w < this.wmax; w++){
-        x = ( w * this.cellwidth) + (this.cellwidth/2);
-        y = ( h * this.cellheight) + (this.cellheight/2);
+        x = ( w * this.cellwidth);// + (this.cellwidth/2);
+        y = ( h * this.cellheight);// + (this.cellheight/2);
         this.pos[(h* this.wmax)+ w] = new PVector(x,y);
         this.pos[(h* this.wmax)+ w].add(this.position);
       }
     }
     this.last = this.pos[0].copy();
+    
   }
   void disorderRow(int row, PVector factor){
         

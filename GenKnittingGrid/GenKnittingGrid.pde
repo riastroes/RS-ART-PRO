@@ -9,44 +9,51 @@ import processing.dxf.*;
 Grid grid;
 Knitting knitting;
 Gcode gcode;
+int k;
 
 void setup(){
-  size(200,200);
+  size(800,800);
   
-  grid = new Grid(new PVector(0,0),200,200,100,100);  //6px X 6px
+  grid = new Grid(new PVector(0,0),800,800,100,100);  //6px X 6px
+  
+  k=0;
+  knitting = new Knitting(grid.get(20,20), 40,14,8);
+  knitting.createStitches(0,14, "01111111111112");
+  knitting.createStitches(1,14, "34444444444445");
+  knitting.createStitches(2,14, "67777777777778");
+  knitting.createStitches(3,14, "34444444444445");
+  knitting.createStitches(4,14, "67777777777778");
+  knitting.createStitches(5,14, "34444444444445");
+  knitting.createStitches(6,14, "67777777777778");
+  knitting.createStitches(7,14, "cdddddddddddde");
+ // knitting.createStitches(1,1, "7");
  
   
-  knitting = new Knitting(grid.get(10,10), 40,40);
-  knitting.createSkirt(40,40,2);
- 
-  gcode = new Gcode();
-  gcode.startCode();
-  gcode.addCode(knitting.gcodeSkirt(0.25, 0.4, 1200));
-  gcode.endCode(true);        //if is last then TRUE
-  gcode.save("genknittinggrid01");
-  //skirt(0.25, 0.4, 1200);
+                  //BEWAREN
+                  //knitting.createSkirt(40,14,20);
+                  //knitting.createRows();
+                 
+                  //gcode = new Gcode();
+                  //gcode.startCode();
+                  //gcode.addCode(knitting.gcodeSkirt(0.25, 0.4, 1200));
+                  //gcode.addCode(knitting.gcodeToStart(1, 0.25, 0.4, 1200));
+                  //gcode.addCode(knitting.gcodeLayer(1, 0.25, 0.4, 1200));
+                  //gcode.endCode(true);        //if is last then TRUE
+                  //gcode.save("genknittinggrid01");
   
-  //layer(1, 0.3, 0.4, 1200);
-  
-  
-  //gcode.endCode(true);        //if is last then TRUE
-  //gcode.save("genknittinggrid01");
+  grid.show();
+  stroke(255,0,0);
+  strokeWeight(1);
+  point(grid.get(20,20).x, grid.get(20,20).y);
+  println(grid.get(20,20));
+                //BEWAREN
+                //knitting.drawSkirt();
   
 }
 
-//void skirt(float layerheight, float thickness, float speed){
-//  gcode.addCode(knitting.gcodeSkirt(layerheight,thickness,speed));
-  
-//}
-//void layer(int layer ,float layerheight, float thickness, float speed){
-//  gcode.addCode(knitting.gcodeToStart(layer, layerheight, thickness, speed));
-//  gcode.addCode(knitting.gcode(layerheight, thickness));
-  
-  
-//}
 void draw(){
-  grid.show();
-  grid.showPoint(10,10);
-  knitting.drawSkirt();
-  noLoop();
+  
+  knitting.drawKnitting(k);
+  k++;
+  
 }

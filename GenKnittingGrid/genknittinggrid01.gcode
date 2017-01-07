@@ -17,15 +17,22 @@ G92 E0             ;zero the extruded length again
 M117 Printing...
 G1 F1200.0
 G1 Z0.25
-G1 X22.0 Y22.0
-G1 X22.0 Y102.0 E8.0
-G1 X102.0 Y102.0 E16.0
-G1 X102.0 Y22.0 E24.0
-G1 X24.0 Y24.0 E31.802563
-G1 X24.0 Y98.0 E39.202564
-G1 X98.0 Y98.0 E46.602566
-G1 X98.0 Y26.0 E53.802567
-G1 X26.0 Y26.0 E61.002567
+G1 X19.0 Y19.0
+G1 X20.0 Y124.0 E10.500476
+G1 X124.0 Y124.0 E20.900476
+G1 X124.0 Y20.0 E31.300476
+G1 X20.0 Y20.0 E41.700478
+G1 X20.0 Y123.0 E52.000477
+G1 X123.0 Y123.0 E62.300476
+G1 X123.0 Y21.0 E72.50047
+G1 X21.0 Y21.0 E82.70047
+;start knitting
+G1 Z0.25 XInfinity YInfinity
+G1 Z0.25 XInfinity YInfinity
+G1 Z0.25 X1.0816936E37 Y9.351621E36
+G1 Z0.25 XInfinity YInfinity
+G1 Z0.25 X9.3211663E27 Y8.058477E27
+G1 Z0.25 X4.10710278E11 Y3.55073786E11
 ;end code
 G91                          ;relative positioning
 G1 E-1 F300                  ;retract the filament a bit before lifting the nozzle, to release some of the pressure

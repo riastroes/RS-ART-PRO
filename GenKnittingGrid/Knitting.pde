@@ -5,114 +5,152 @@ class Knitting{
   PVector gpos;
   
   PVector[] skirt;
+  PVector[] knitting;
+  int k;
   PVector first;
   PVector last;
   Row[] rows;
+  int maxrows;
+  int maxstitches;
+  int maxstichtesinrow;
   String[] commands = {";knitting"};
   
-  Knitting(PVector gpos, int knittingwidth, int knittingheight){
+  Knitting(PVector first, int knittingwidth, int knittingheight, int maxrows){
    
-    this.gpos = gpos.copy();
-    
+    this.first = first.copy();
+    grid.last = new PVector(0,0).add(this.first);
+    this.k = 0;
     this.skirt = new PVector[9];
     this.knittingwidth = knittingwidth;
     this.knittingheight = knittingheight;
-    
-    
-    
-   
-    //this.first = new PVector(pos.x + 5, pos.y + 5 );
-    //this.last = this.first.copy();
-    //this.rows = new Row[this.maxrows];
-   
-    
-    //this.rows[0] = new  Row(this.last, kwidth, kheight/this.maxrows, this.maxstitches);
-    //this.rows[0].createSetup();
-    //this.last = this.rows[0].last;
-   
-     
-    //for(int i = 1; i < this.rows.length-1; i++){
-    //  this.rows[i] = new  Row(this.last, kwidth, kheight/this.maxrows, this.maxstitches);
-    //  this.last = this.rows[i].last;
-     
-    //  if(i % 2 == 0){
-    //     println("ga naar rechts");
-    //    this.rows[i].createLRrecht();
-    //     this.last = this.rows[i].last;
-    //  }
-    //  else{
-    //    println("ga naar links");
-    //    this.rows[i].createRLrecht();
-    //    this.last = this.rows[i].last;
-    //  }
-      
-    //}
-    //afhechten
-   //println("afhechten");
-    //this.rows[this.rows.length-1] = new  Row(this.last, kwidth, kheight/this.maxrows, this.maxstitches);
-    //this.rows[this.rows.length-1].createFinish();
-    
+    this.maxrows = maxrows; //5;int(this.knittingheight/7);
+    this.maxstichtesinrow = int( this.knittingwidth/4);
+    this.rows = new Row[this.maxrows];
+    this.maxstitches = 14;
+    this.knitting = new PVector[this.maxrows * this.maxstitches * 14];
     
   }
- void createSkirt(int w, int h, int marge){
-    this.skirt[0] = grid.get(0,0).add(this.gpos);
-    this.skirt[1] = grid.get(0,h).add(this.gpos);
-    this.skirt[2] = grid.get(w,h).add(this.gpos);
-    this.skirt[3] = grid.get(w,0).add(this.gpos);
+ void createRows(){
+    this.maxstitches = 0;
    
-    this.skirt[4] = grid.get(1,1).add(this.gpos);
-    this.skirt[5] = grid.get(1,h-marge).add(this.gpos);
-    this.skirt[6] = grid.get(w-marge, h-marge).add(this.gpos);
-    this.skirt[7] = grid.get(w-marge, marge).add(this.gpos);
-    this.skirt[8] = grid.get(2, 2).add(this.gpos);
-    grid.last = this.skirt[7].copy().add(this.gpos);
-   
+    this.rows[0] = new Row(grid.last, this.maxstichtesinrow);
+    //this.maxstitches += this.rows[0].maxstitches;
+    this.rows[0].createSetup();
+    for(int r = 1; r < this.maxrows-1; r++){
+      this.rows[r] = new Row(grid.last,this.maxstichtesinrow);
+      this.maxstitches += this.rows[r].maxstitches;
+      
+      if(r % 2 == 1){
+        this.rows[r].createRLrecht(); // van rechts naar links
+      }
+      else{
+        this.rows[r].createLRrecht(); // van links naar rechts
+      }
+    }
+    this.rows[this.maxrows-1] = new Row(grid.last,this.maxstichtesinrow);
+    this.maxstitches += this.rows[this.maxrows-1].maxstitches;
+    if((this.maxrows-1) % 2 == 1){
+      this.rows[this.maxrows-1].createRLFinish(); // van rechts naar links
+    }
+    else{
+      this.rows[this.maxrows-1].createLRFinish(); // van links naar rechts
+    }
+    
+    this.knitting = new PVector[this.maxrows * this.maxstitches * 13];
+    int k = 0;
+    for(int r = 0; r < this.maxrows; r++){
+      for(int s = 0; s < this.rows[r].maxstitches; s++){
+        for(int i = 0; i < 13; i++){
+        this.knitting[k] = this.rows[r].stitches[s].p[i];
+        
+        k++;
+        }
+      }
+    }
+    
+    //println("rows:     " + this.maxrows);
+    //println("stitches: " + this.maxstitches);
+    //println("knitting: " + this.knitting.length);
+    //println("grid.last:" + grid.last);
+  
+    
     
  }
- //String[] gcode(float layerheight, float thickness ){
- //    String[] knitting = {};
- //    knitting = append(knitting, ";row");
- //    for(int i = 0; i < this.rows.length; i++){
- //     knitting = concat(knitting, this.rows[i].gcode(layerheight,thickness));
- //    }
- //   return knitting;
- //  }
-        
- 
-  //String[] gcodeSkirt(float layerheight, float thickness, float speed){
-  //  String[] skirt = {};
-  //  if(gcode.speed != speed){
-  //    gcode.speed = speed;
-  //    skirt = append(skirt, "G1 F" + gcode.speed);
-  //  }
-  //  if(gcode.layerheight != layerheight){
-  //    gcode.layerheight = layerheight;
-  //    skirt = append(skirt, "G1 Z" +  gcode.layerheight);
-  //    skirt = append(skirt, "G1 X"+  this.pos[1].x + " Y"+ this.pos[1].y );
+ void createStitches(int row, int maxstitches, String type){
+    this.maxstitches = maxstitches;
+    this.rows[row] = new Row(grid.last, this.maxstitches);
+    this.rows[row].createStitches(type);
+   
+    
+      PVector next;
+      for(int r = 0; r < this.rows[row].maxstitches; r++){
+        for(int i = 0; i < 14; i++){
+          next = this.rows[row].stitches[r].p[i];
+          if((row % 2) == 1 ){
+            next.x = -1* next.x;
+            println("next x:",next.x);
+          }
+          this.knitting[this.k] = next;
+          this.knitting[this.k].add(grid.last);
+          this.k++;
+        }
+        grid.last = this.knitting[this.k-1].copy();
+        //println(grid.last);
       
-  //  }
+    }
+    //println("rows:     " + this.maxrows);
+    //println("stitches: " + this.maxstitches);
+    //println("knitting: " + this.knitting.length);
+    //println("grid.last:" + grid.last);
+ }
+ 
+ void createSkirt(int w, int h, int marge){
+   
+    this.skirt[0] = this.first.copy().add(-marge-2,-marge-2);
+    this.skirt[1] = this.first.copy().add(-marge-1,h + (2*marge) + 3);
+    this.skirt[2] = this.first.copy().add(w + (2*marge)+ 3,h + (2*marge) + 3);
+    this.skirt[3] = this.first.copy().add(w + (2*marge)+ 3,-marge -1);
     
-  //  for(int i = 2; i < this.pos.length ; i++){
-  //    PVector v = PVector.sub(this.pos[i], this.pos[i-1]);
-  //    gcode.extrude += v.mag() * layerheight * thickness;
-  //    skirt = append(skirt, "G1 X"+ this.pos[i].x + " Y"+ this.pos[i].y + " E" + gcode.extrude);
-        
-  // }
-  //  return skirt;
-  //}
-  //String[] gcodeToStart(int layer, float layerheight, float thickness, float speed){
-  //  String[] tostart = {};
-  //  if(gcode.speed != speed){
-  //    gcode.speed = speed;
-  //    tostart = append(tostart, "G1 F" + gcode.speed);
-  //  }
-  //  //tostart = append(tostart, "G1 Z"+ ((layer*layerheight)+2));
-  //  PVector v = PVector.sub(this.pos[9], this.first);
-  //  gcode.extrude += v.mag() * layerheight * thickness;
-  //  tostart = append(tostart, "G1 Z"+ (layer*layerheight) +" X"+  this.first.x + " Y"+ this.first.y );
+    this.skirt[4] = this.first.copy().add(-marge-1,-marge-1);
+    this.skirt[5] = this.first.copy().add(-marge-1,h + (2* marge) + 2);
+    this.skirt[6] = this.first.copy().add(w + (2*marge) + 2, h + (2* marge) + 2);
+    this.skirt[7] = this.first.copy().add(w + (2*marge) + 2, -marge);
+    this.skirt[8] = this.first.copy().add(-marge, -marge);
+   
+    grid.last = this.skirt[8].copy();
+//    println("last:" + grid.last);
     
-  //  return tostart;
-  //}
+ }
+ 
+  String[] gcodeLayer(int layer, float layerheight, float thickness, float speed){
+    String[] commands = {";start knitting"};
+    if(gcode.speed != speed){
+      gcode.speed = speed;
+      commands = append(commands, "G1 F" + gcode.speed);
+    }
+    
+    PVector v;
+    for(int k =1; k < this.knitting.length; k++){
+      println("k" + k + "  " + this.knitting[k]);
+      v = PVector.sub(this.knitting[k-1], this.knitting[k]);
+      gcode.extrude += v.mag() * layerheight * thickness;
+      commands = append(commands, "G1 Z"+ (layer*layerheight) +" X"+  this.knitting[k].x + " Y"+ this.knitting[k].y );
+    }
+    return commands;
+  }
+  
+  String[] gcodeToStart(int layer, float layerheight, float thickness, float speed){
+    String[] tostart = {};
+    if(gcode.speed != speed){
+      gcode.speed = speed;
+      tostart = append(tostart, "G1 F" + gcode.speed);
+    }
+    PVector v = PVector.sub(grid.last, this.knitting[0]);
+    gcode.extrude += v.mag() * layerheight * thickness;
+    tostart = append(tostart, "G1 Z"+ (layer*layerheight) +" X"+  this.knitting[0].x + " Y"+ this.knitting[0].y );
+    
+    return tostart;
+  }
   
  
   String[] gcodeSkirt(float layerheight, float thickness, float speed){
@@ -138,12 +176,27 @@ class Knitting{
   }
   void drawSkirt(){
     
-    strokeWeight(3);
+    strokeWeight(0.2);
     stroke(0,0,200);
+    noFill();
     beginShape();
        for(int s = 0; s < this.skirt.length; s++){
         vertex(this.skirt[s].x, this.skirt[s].y);
       }
     endShape();
+  }
+  void drawKnitting(int k){
+    if(k < this.knitting.length){
+    strokeWeight(1);
+    stroke(0);
+    
+    beginShape();
+       for(int i = 0; i <k; i++){
+        vertex(this.knitting[i].x, this.knitting[i].y);
+       
+      }
+    endShape();
+    }
+    
   }
 }  

@@ -1,6 +1,7 @@
 class Row{
   PVector pos;
-  PVector last;
+  PVector first;
+  
   float rwidth;
   float rheight;
   int sign;
@@ -11,102 +12,97 @@ class Row{
   String rowtype;
   
   
-   Row(PVector pos, float pwidth, float pheight, int maxstitches){
-     this.pos = pos.copy();
-     this.maxstitches = maxstitches;
-     this.rwidth = pwidth;
-     this.rheight = pheight;
-     this.stitches = new Stitch[maxstitches];
-     this.last = this.pos.copy() ;
+   Row(PVector first, int maxstitches){
+    this.maxstitches = maxstitches;
+    this.stitches = new Stitch[this.maxstitches];
+    this.first = first.copy();
+    grid.last = this.first.copy();
     }
-   void createSetup(){
+   
+   void createStitches(String types){
      
-     float ws = this.rwidth/this.maxstitches;
-     float hs = this.rheight;
-     println(this.last);
+      
+      for(int i = 0; i < types.length(); i++){
+       
+          this.stitches[i] = new Stitch(types.charAt(i));
+        
+      }
+  }
+   
+   void createSetup(){
      for(int i = 0; i < this.stitches.length; i++){
        if(i == 0){                           // eerste steek van de opzet
-         this.stitches[i] = new Stitch(this.last, "firstrsetup", ws , hs);
-         this.last = this.stitches[i].last;
-         
+         this.stitches[i] = new Stitch('0');
        }
        else if ( i < this.stitches.length-1){// opzetsteken
-         this.stitches[i] = new Stitch(this.last, "rsetup", ws , hs);
-         this.last = this.stitches[i].last;
+         this.stitches[i] = new Stitch('1');
        }
        else{                                // laatste steek van de opzet
-         this.stitches[i] = new Stitch(this.last, "lastrsetup", ws , hs);
-         this.last = this.stitches[i].last;
+         this.stitches[i] = new Stitch('2');
        }
      }
-      
    }
    void createLRrecht(){
      //van links naar rechts
-     float ws = this.rwidth/this.maxstitches;
-     float hs = this.rheight;
+     
      for(int i = 0; i < this.stitches.length; i++){
        if(i == 0){                           // eerste steek van de regel
-         
-         this.stitches[i] = new Stitch(this.last, "firstrrecht", ws , hs);
-         this.last = this.stitches[i].last;
+         this.stitches[i] = new Stitch('3');
        }
        else if ( i < this.stitches.length-1){// steken
-         this.stitches[i] = new Stitch(this.last, "rrecht", ws , hs);
-         this.last = this.stitches[i].last;
+         this.stitches[i] = new Stitch( '4');
        }
        else{                                // laatste steek van de regel
-         this.stitches[i] = new Stitch(this.last, "lastrrecht", ws , hs);
-         this.last = this.stitches[i].last;
-       }
+         this.stitches[i] = new Stitch('5');
+      }
      }
    }
     void createRLrecht(){
      //van rechts naar links
-     float ws = this.rwidth/this.maxstitches;  //MINUS
-     float hs = this.rheight;
+     
      for(int i = 0; i < this.stitches.length; i++){
       
        if(i == 0){                           // eerste steek van de regel
-         this.stitches[i] = new Stitch(this.last, "firstlrecht",-ws , hs);
-         this.last = this.stitches[i].last;
+         this.stitches[i] = new Stitch('6');
        }
        else if ( i < this.stitches.length-1){// steken
-         this.stitches[i] = new Stitch(this.last, "lrecht", -ws , hs);
-         this.last = this.stitches[i].last;
+         this.stitches[i] = new Stitch('7');
        }
        else{                                // laatste steek van de regel
-         this.stitches[i] = new Stitch(this.last, "lastlrecht", -ws , hs);
-         this.last = this.stitches[i].last;
-         
+         this.stitches[i] = new Stitch('8');
        }
      }
    }
    
-   void createFinish(){
-     
-     float ws = this.rwidth/this.maxstitches;
-     float hs = this.rheight;
-     println(this.last);
-     for(int i = 0; i < this.stitches.length; i++){
-       if(i == 0){                           // eerste steek afhechten
-         
-         this.stitches[i] = new Stitch(this.last, "firstrfinish", ws , hs);
-         this.last = this.stitches[i].last;
-         
+   void createRLFinish(){
+      for(int i = 0; i < this.stitches.length; i++){
+       if(i == 0){                           // eerste steek afhechten van links naar rechts
+          this.stitches[i] = new Stitch('9');
        }
-       else if ( i < this.stitches.length-1){// afhechten
-         this.stitches[i] = new Stitch(this.last, "rfinish", ws , -hs);
-         this.last = this.stitches[i].last;
+       else if ( i < this.stitches.length-1){// afhechten van links naar rechts
+         this.stitches[i] = new Stitch('a');
        }
-       else{                                // laatste steek afhechten
-         this.stitches[i] = new Stitch(this.last, "lastrfinish", ws , -hs);
-         this.last = this.stitches[i].last;
+       else{                                // laatste steek afhechten van links naar rechts
+         this.stitches[i] = new Stitch('b');
        }
      }
       
    }
-       
+   
+    void createLRFinish(){
+     for(int i = 0; i < this.stitches.length; i++){
+       if(i == 0){                           // eerste steek afhechten van rechts naar links
+         this.stitches[i] = new Stitch('c');
+        }
+       else if ( i < this.stitches.length-1){// afhechten van rechts naar links
+         this.stitches[i] = new Stitch('d');
+       }
+       else{                                // laatste steek afhechten van rechts naar links
+         this.stitches[i] = new Stitch('e');
+        }
+     }
+      
+   }
      
   
    String[] gcode(float layerheight, float thickness ){
@@ -115,18 +111,14 @@ class Row{
      for(int stitch = 0; stitch < this.maxstitches; stitch++){
       stitches = concat(stitches, this.stitches[stitch].gcode(layerheight,thickness));
      }
-    
      return stitches;
    }
    
    void draw(){
      
-      beginShape();
+        for(int i = 0; i < this.stitches.length; i++){
+          this.stitches[i].draw();
+        }
       
-      for(int i = 0; i < this.stitches.length; i++){
-        this.stitches[i].draw();
-      }
-      endShape();
-  
    }
 }

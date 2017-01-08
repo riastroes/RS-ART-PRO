@@ -28,10 +28,10 @@ class Gcode{
      this.commands = append(this.commands, "M107               ;start with the fan off");
      this.commands = append(this.commands, "G28 X0 Y0          ;move X/Y to min endstops, so the head is out of the way");                           
      this.commands = append(this.commands, "G28 Z0             ;move Z to min endstops");
-     this.commands = append(this.commands, "G1 Z6.0 F3000      ;move the platform up 15mm");
-     this.commands = append(this.commands, "G1 F200 E30        ;extrude 10mm of feed stock");
-     this.commands = append(this.commands, "G92 E0             ;zero the extruded length again");
-     //this.commands = append(this.commands, "G1 F3000           ;set printing speed");
+     this.commands = append(this.commands, "G1 Z15.0 F3000      ;move the platform up 15mm");
+     this.commands = append(this.commands, "G92 E0                  ;zero the extruded");
+     this.commands = append(this.commands, "G1 F200 E3              ;extrude 3mm of feed stock");
+     this.commands = append(this.commands, "G92 E0                  ;zero the extruded length again");
      this.commands = append(this.commands, "M117 Printing...");
     
    }

@@ -17,7 +17,7 @@ class Knitting{
   Knitting(PVector first, int maxrows, int maxstitchesinrow){
    
     this.first = first.copy();
-    grid.last = new PVector(0,0).add(this.first);
+    grid.last = new PVector(0,0,0).add(this.first);
     this.k = 0;
     this.skirt = new PVector[9];
     
@@ -96,7 +96,7 @@ class Knitting{
           }
           if((row % 2) == 1 ){
             next.x = -1* next.x;
-            println("next x:",next.x);
+            
           }
           
           this.knitting[this.k] = next;
@@ -143,13 +143,14 @@ class Knitting{
     
     PVector v;
     for(int k =1; k < this.knitting.length; k++){
-      println("k" + k + "  " + this.knitting[k]);
+      
       v = PVector.sub(this.knitting[k-1], this.knitting[k]);
-      if(abs(v.x) < abs(v.y)){
-         gcode.extrude += v.mag() * layerheight * (thickness+0.2) ;
+      if(this.knitting[k].z == 1){
+         gcode.extrude += v.mag() * layerheight * (thickness+0.4) ;
+         println("averechts:"+ this.knitting[k]);
       }
       else{
-         gcode.extrude += v.mag() * layerheight * (thickness-0.2);
+         gcode.extrude += v.mag() * layerheight * thickness;
       }
       commands = append(commands, "G1 Z"+ (layer*layerheight) +" X"+  this.knitting[k].x + " Y"+ this.knitting[k].y + " E" + gcode.extrude);
     }

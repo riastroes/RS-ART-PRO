@@ -116,6 +116,14 @@ class Grid{
         }
     }
 }
+  void projectOnCircle(PVector center, float radius){
+    for(int h =0; h< this.hmax; h++){
+      for(int w =0; w< this.wmax; w++){
+      this.pos[(h* this.wmax)+ w].x = center.x +((radius - (radius/this.hmax) * h) *sin((TWO_PI/this.wmax)*w));
+      this.pos[(h* this.wmax)+ w].y = center.y +((radius - (radius/this.hmax) * h) * cos((TWO_PI/this.wmax)*w));
+      }
+    }
+  }
   void move(PVector to){
     PVector move = to.sub(this.pos[0]);
     for(int h = 0; h < this.hmax; h++){

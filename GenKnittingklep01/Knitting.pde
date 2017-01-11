@@ -31,7 +31,7 @@ class Knitting{
   }
 
  void createStitches(int row, String type){
-    PVector next = new PVector(0,0,0);
+    PVector next = new PVector(0,0,0); //<>//
     String atype = "";
     if(row % 2 == 1){
       atype= new StringBuilder(type).reverse().toString();
@@ -98,16 +98,22 @@ class Knitting{
     PVector v;
     for(int k =1; k < this.maxk; k++){
       
-      v = PVector.sub(this.knitting[k-1], this.knitting[k]);
-      v.mult(scale);
-      if(abs(v.x) < abs(v.y)){
-         gcode.extrude += v.mag() * layerheight * (thickness) ;
-         
+     
+      if(int(this.knitting[k].z) == 0){
+        commands = append(commands, "G1 Z"+ (layer*layerheight) +" X"+  (this.knitting[k].x*scale) + " Y"+ (this.knitting[k].y*scale));
       }
       else{
-         gcode.extrude += v.mag() * layerheight * (thickness);
+        v = PVector.sub(this.knitting[k-1], this.knitting[k]);
+        v.mult(scale);
+        if(abs(v.x) < abs(v.y)){
+           gcode.extrude += v.mag() * layerheight * (thickness) ;
+        }
+        else{
+           gcode.extrude += v.mag() * layerheight * (thickness);
+        }
+        commands = append(commands, "G1 Z"+ (layer*layerheight) +" X"+  (this.knitting[k].x*scale) + " Y"+ (this.knitting[k].y*scale) + " E" + gcode.extrude);
       }
-      commands = append(commands, "G1 Z"+ (layer*layerheight) +" X"+  (this.knitting[k].x*scale) + " Y"+ (this.knitting[k].y*scale) + " E" + gcode.extrude);
+      
     }
     return commands;
   }
@@ -166,12 +172,12 @@ class Knitting{
     
     for(int i = 1; i < k; i++){
         if(int(this.knitting[i].z) == 1){
-          strokeWeight(2);
-          stroke(0,0,255);
+          strokeWeight(1);
+          stroke(0);
         }
         else if(int(this.knitting[i].z) == 3){
            strokeWeight(1);
-           stroke(255,0,0);
+           stroke(0);
         }
         else if(int(this.knitting[i].z) == 0){
            strokeWeight(1);
@@ -193,8 +199,8 @@ class Knitting{
         v = PVector.sub(this.knitting[i-1], this.knitting[i]);
         if(abs(v.x) < abs(v.y)){
        // if(int(this.knitting[i].z) == 1){
-          strokeWeight(3);
-          stroke(0);
+          strokeWeight(1);
+          stroke(255);
         }
         else{
           strokeWeight(1);

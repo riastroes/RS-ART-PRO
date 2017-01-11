@@ -24,7 +24,9 @@ class Grid{
     this.center = pos.copy();
     this.center.add(new PVector(maxwidth/2, maxheight/2,0));
     
-    
+    //println("cellwidth: " + this.cellwidth + " x " + this.wmax);
+    //println("cellheight: " + this.cellheight+ " x " + this.hmax);
+       
     this.pos = new PVector[this.hmax * this.wmax];
     float x, y, z;
     for(int h = 0; h < this.hmax; h++){
@@ -105,17 +107,6 @@ class Grid{
       }
     }  
   }
-  void disorderCols(int begincol, int endcol, float grow){
-      float g;
-      for(int h = 0; h < this.hmax; h++){
-        g = 1;
-        for(int w = begincol; w < endcol; w++){
-          g += grow;
-           this.pos[(h* this.wmax)+ w].mult(g);
-           println("grown");
-        }
-    }
-}
   void move(PVector to){
     PVector move = to.sub(this.pos[0]);
     for(int h = 0; h < this.hmax; h++){
@@ -144,12 +135,11 @@ class Grid{
     return a;
   }
   
-  int pos(float x, float y){
+  int mouse(float x, float y){
     int xx = floor((x-(this.position.x)) /( this.cellwidth));
     int yy = floor((y-(this.position.y)) / (this.cellheight));
     return (yy * this.wmax) + xx;
   }
-  
   PVector get(int x, int y, int z){
     int i = (y * this.wmax) + x;
     this.pos[i].z = z;

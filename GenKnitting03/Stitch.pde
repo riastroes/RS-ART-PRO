@@ -26,7 +26,7 @@ class Stitch{
         this.stitch[9] = new PVector(4,0,2);
         break;
       }
-      case 'b':    {                      //"lastrsetup":{          //laatste opzetsteek naar rechts
+      case 'b':    {                      //"lastrsetup":{         
         this.max = 12;
         this.stitch = new PVector[this.max];
         this.stitch[0] = new PVector(0,0,2);
@@ -84,7 +84,7 @@ class Stitch{
         //this.stitch[14] = new PVector(-4,4,2);
          break;
       }
-      case 'e':      {                    //recht
+      case 'e':      {                    //eerste rechts
         this.max = 13;
         this.stitch = new PVector[this.max];
         this.stitch[0] = new PVector(0,0,2);
@@ -103,7 +103,7 @@ class Stitch{
        
         break;
       }
-      case 'f':      {                    //recht
+      case 'f':      {                    //rechts
         this.max = 13;
         this.stitch = new PVector[this.max];
         this.stitch[0] = new PVector(0,0,1);

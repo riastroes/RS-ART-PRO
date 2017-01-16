@@ -1,0 +1,36 @@
+function Grid(){
+PVector position;
+ int wmax;
+ int hmax;
+ float cellwidth;
+ float cellheight;
+ PVector center;
+
+ PVector[] pos;
+ PVector last;
+
+
+
+  Grid(PVector pos, float maxwidth, float maxheight, int wmax, int hmax){
+   this.wmax = wmax;
+   this.hmax = hmax;
+   this.cellwidth = maxwidth / this.wmax;
+   this.cellheight = maxheight / this.hmax;
+   this.position = pos;
+   this.center = pos.copy();
+   this.center.add(new PVector(maxwidth/2, maxheight/2,0));
+
+
+   this.pos = new PVector[this.hmax * this.wmax];
+   float x, y, z;
+   for(int h = 0; h < this.hmax; h++){
+     for( int w = 0 ; w < this.wmax; w++){
+       x = ( w * this.cellwidth);// + (this.cellwidth/2);
+       y = ( h * this.cellheight);// + (this.cellheight/2);
+       z = 0;
+       this.pos[(h* this.wmax)+ w] = new PVector(x,y,z);
+       this.pos[(h* this.wmax)+ w].add(this.position);
+     }
+   }
+   this.last = this.pos[0].copy();
+}

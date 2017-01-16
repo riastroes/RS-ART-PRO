@@ -45,7 +45,7 @@ void setup(){
   grid.show();
   stroke(255,0,0);
   strokeWeight(1);
-  //knitting.drawSkirt();
+  knitting.drawSkirt();
   
   k = 0;
 }

@@ -153,7 +153,7 @@ class Grid{
   }
   PVector getRandomPos(){
     int a = int(random(this.pos.length));
-    return this.pos[a];
+    return this.pos[a].copy();
   }
   int getRandomIndex(){
     int a = int(random(this.pos.length));
@@ -169,12 +169,12 @@ class Grid{
   PVector get(int x, int y, int z){
     int i = (y * this.wmax) + x;
     this.pos[i].z = z;
-    return this.pos[i];
+    return this.pos[i].copy();
   }
   PVector get(int x, int y){
     int i = (y * this.wmax) + x;
     this.pos[i].z = 0;
-    return this.pos[i];
+    return this.pos[i].copy();
   }
   void show(){
     strokeWeight(1);

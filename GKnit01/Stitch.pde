@@ -72,20 +72,21 @@ class Stitch{
         
       }
       case '4':    {                      //"rrecht":{
-        this.max = 12;
+        this.max = 13;
         this.p = new PVector[this.max];
         this.p[0] = new PVector(1,1,1);
         this.p[1] = new PVector(1,3,3);
-        this.p[2] = new PVector(0,4,3);
-        this.p[3] = new PVector(0,6,3);
-        this.p[4] = new PVector(1,7,1);
+        this.p[2] = new PVector(2,3,3);
+        this.p[3] = new PVector(3,4,3);
+        this.p[4] = new PVector(3,6,1);
         this.p[5] = new PVector(2,7,1);
-        this.p[6] = new PVector(3,6,1);
-        this.p[7] = new PVector(3,4,3);
-        this.p[8] = new PVector(2,3,3);
-        this.p[9] = new PVector(2,1,3);
-        this.p[10] = new PVector(3,0,1);
-        this.p[11] = new PVector(4,0,1);
+        this.p[6] = new PVector(1,7,1);
+        this.p[7] = new PVector(0,6,3);
+        this.p[8] = new PVector(0,4,3);
+        this.p[9] = new PVector(1,3,3);
+        this.p[10] = new PVector(2,1,3);
+        this.p[11] = new PVector(3,0,1);
+        this.p[12] = new PVector(4,0,1);
         
         break;
       }
@@ -132,14 +133,14 @@ class Stitch{
         
         this.p[0] = new PVector(1,0,1);
         this.p[1] = new PVector(2,1,1);
-        this.p[2] = new PVector(2,3,3);
-        this.p[3] = new PVector(1,4,3);
-        this.p[4] = new PVector(1,6,3);
-        this.p[5] = new PVector(2,7,1);
-        this.p[6] = new PVector(3,7,1);
-        this.p[7] = new PVector(4,6,1);
-        this.p[8] = new PVector(4,4,3);
-        this.p[9] = new PVector(3,3,3);
+        this.p[2] = new PVector(3,3,3);
+        this.p[3] = new PVector(4,4,3);
+        this.p[4] = new PVector(4,6,3);
+        this.p[5] = new PVector(3,7,1);
+        this.p[6] = new PVector(2,7,1);
+        this.p[7] = new PVector(1,6,1);
+        this.p[8] = new PVector(1,4,3);
+        this.p[9] = new PVector(2,3,3);
         this.p[10] = new PVector(3,1,3);
         this.p[11] = new PVector(4,0,1);
        

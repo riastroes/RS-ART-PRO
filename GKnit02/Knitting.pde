@@ -105,13 +105,13 @@ class Knitting{
         v.mult(scale);
         int z = int(this.knitting.get(k).z);
         if( z == 1){
-           gcode.extrude += v.mag() * thickness * 2 ;
+           gcode.extrude += v.mag() * thickness * 0.8 ;
                   }
         else if( z == 2){
            gcode.extrude += v.mag() * thickness;
         }
         else if( z == 3){
-           gcode.extrude += v.mag() * thickness;
+           gcode.extrude += v.mag() * thickness * 2.1;
         }
         else if( z == 0){
            gcode.extrude += v.mag() * thickness;

@@ -30,7 +30,7 @@ class Gcode{
      this.commands = append(this.commands, "G28 Z0             ;move Z to min endstops");
      this.commands = append(this.commands, "G1 Z15.0 F3000      ;move the platform up 15mm");
      this.commands = append(this.commands, "G92 E0                  ;zero the extruded");
-     this.commands = append(this.commands, "G1 F200 E3              ;extrude 3mm of feed stock");
+     this.commands = append(this.commands, "G1 F200 E10              ;extrude 10mm of feed stock");
      this.commands = append(this.commands, "G92 E0                  ;zero the extruded length again");
      this.commands = append(this.commands, "M117 Printing...");
     

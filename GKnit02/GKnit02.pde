@@ -23,32 +23,32 @@ void setup(){
   
  // PVector first = new PVector(72 -(4*13),113);
  PVector first = new PVector(50,50);
- knitting = new Knitting(first,11);
- knitting.createStitches(0, "rrrrrrrrrrs");
- knitting.createStitches(1, "kllllllllll");
+ knitting = new Knitting(first,12);
+ knitting.createStitches(0, "bbbbbbbbbbc");
+ knitting.createStitches(1, "onnnnnnnnnn");
  knitting.createStitches(2, "rrrrrrrrrrs");
  knitting.createStitches(3, "kllllllllll");
- knitting.createStitches(4, "rrrrrrrrrrs");
- knitting.createStitches(5, "kllllllllll");
+ knitting.createStitches(4, "bbbbbbbbbbc");
+ knitting.createStitches(5, "onnnnnnnnnn");
  knitting.createStitches(6, "rrrrrrrrrrs");
  knitting.createStitches(7, "kllllllllll");
- knitting.createStitches(8, "rrrrrrrrrrs");
- knitting.createStitches(9, "kllllllllll");
+ knitting.createStitches(8, "bbbbbbbbbbc");
+ knitting.createStitches(9, "onnnnnnnnnn");
  knitting.createStitches(10,"rrrrrrrrrrs");
-  
+ knitting.createStitches(11, "kllllllllll"); 
 
 
   //BEWAREN
   knitting.first = new PVector(50,50);
-  knitting.createSkirt(11,12,3);
+  knitting.createSkirt(12,12,3);
   
   gcode = new Gcode();
   gcode.startCode();
   gcode.addCode(knitting.gcodeSkirt(0.25, 0.4, 1600, 0.20));
   //gcode.addCode(knitting.gcodeToStart(1, 0.25, 0.4, 1200, 0.20));
-  gcode.addCode(knitting.gcodeLayer(1, 0.25, 0.1, 1200, 0.20));//layer, layerheight,thickness, speed, scale
+  gcode.addCode(knitting.gcodeLayer(1, 1.4, 0.1, 800, 0.20));//layer, layerheight,thickness, speed, scale
   gcode.endCode(true);        //if is last then TRUE
-  gcode.save("GKnit-35");
+  gcode.save("patternRA-03");
   
   grid.show();
   stroke(255,0,0);

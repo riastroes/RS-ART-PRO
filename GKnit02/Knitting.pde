@@ -59,7 +59,7 @@ class Knitting{
  
  void createSkirt(int rows, int stitches, int marge){
    int w = stitches * 4;
-   int h = (rows - 1) * 4;
+   int h = (rows) * 2;
    PVector next = this.first.copy();
    
    next.add(-marge,-marge);
@@ -84,18 +84,18 @@ class Knitting{
     String[] commands = {";start knitting"};
     if(gcode.speed != speed){
       gcode.speed = speed;
-      commands = append(commands, "G1 F" + gcode.speed);
+      commands = append(commands, "G0 F" + gcode.speed);
     }
     if(gcode.layerheight != (layer*layerheight)){
       gcode.layerheight = (layer*layerheight);
-      commands = append(commands, "G1 Z"+ (gcode.layerheight));
+      commands = append(commands, "G0 Z"+ (gcode.layerheight));
     }
     PVector v;
     for(int k =1; k < this.knitting.size(); k++){
       
      
       if(int(this.knitting.get(k).z) == 0){
-        commands = append(commands, "G1 X"+  (this.knitting.get(k).x*scale) + " Y"+ (this.knitting.get(k).y*scale));
+        commands = append(commands, "G0 X"+  (this.knitting.get(k).x*scale) + " Y"+ (this.knitting.get(k).y*scale));
       }
       else{
         v = PVector.sub(this.knitting.get(k-1), this.knitting.get(k));
@@ -118,7 +118,7 @@ class Knitting{
         }else{
           println("FOUT");
         }
-        println(v.mag() + ": " + (v.mag() * thickness));
+        //println(v.mag() + ": " + (v.mag() * thickness));
          
         
         commands = append(commands, "G1 X"+  (this.knitting.get(k).x*scale) + " Y"+ (this.knitting.get(k).y*scale) + " E" + gcode.extrude);
@@ -140,7 +140,7 @@ class Knitting{
     //PVector v = PVector.sub(grid.last, this.knitting.get(0));
     //v.mult(scale);
     //gcode.extrude += v.mag() * layerheight * thickness;
-    tostart = append(tostart, "G1 Z"+ (layer*layerheight) +" X"+  (this.knitting.get(0).x*scale) + " Y"+ (this.knitting.get(0).y*scale)  );
+    tostart = append(tostart, "G0 Z"+ (layer*layerheight) +" X"+  (this.knitting.get(0).x*scale) + " Y"+ (this.knitting.get(0).y*scale)  );
     
     return tostart;
   }
@@ -154,8 +154,8 @@ class Knitting{
     }
     if(gcode.layerheight != layerheight*thickness){
       gcode.layerheight = layerheight*thickness;
-      skirtcommands = append(skirtcommands, "G1 Z" +  gcode.layerheight);
-      skirtcommands = append(skirtcommands, "G1 X"+  (this.skirt[0].x*scale) + " Y"+ (this.skirt[0].y*scale) );
+      skirtcommands = append(skirtcommands, "G0 Z" +  gcode.layerheight);
+      skirtcommands = append(skirtcommands, "G0 X"+  (this.skirt[0].x*scale) + " Y"+ (this.skirt[0].y*scale) );
       
     }
     
@@ -187,14 +187,24 @@ class Knitting{
       for(int k = 1; k <this.knitting.size(); k++){
         v = PVector.sub(this.knitting.get(k-1), this.knitting.get(k));
         if(v.mag()>0){
-          if(int(this.knitting.get(k).z) == 3){
-            strokeWeight(5);
-            stroke(255);
-          }
-          else{
+          int z = int(this.knitting.get(k).z);
+          if(z == 0){
             strokeWeight(1);
-            stroke(255);
+            stroke(0,255,0);
           }
+          else if(z == 1){
+            strokeWeight(1);
+            stroke(0);
+          }
+          else if(z == 2){
+            strokeWeight(3);
+            stroke(0);
+          }
+          else if(z == 3){
+            strokeWeight(6);
+            stroke(0);
+          }
+          
           line(this.knitting.get(k-1).x, this.knitting.get(k-1).y, this.knitting.get(k).x, this.knitting.get(k).y);
         }
       }

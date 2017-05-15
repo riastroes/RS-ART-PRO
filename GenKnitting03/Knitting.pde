@@ -25,7 +25,7 @@ class GenKnitting{
   }
 
  void createRow(int row, String type){
-    this.rows[row] = new Row(row, type); //<>//
+    this.rows[row] = new Row(row, type); //<>// //<>//
  }
  void generateKnitting(){
    //
@@ -73,7 +73,7 @@ class GenKnitting{
     String[] commands = {";start knitting"};
     if(gcode.speed != speed){
       gcode.speed = speed;
-      commands = append(commands, "G1 F" + gcode.speed);
+      commands = append(commands, "G0 F" + gcode.speed);
     }
     
     PVector v;
@@ -81,7 +81,7 @@ class GenKnitting{
       
      
       if(int(this.knitting.get(k).z) == 0){
-        commands = append(commands, "G1 Z"+ (layer*layerheight) +" X"+  (this.knitting.get(k).x*scale) + " Y"+ (this.knitting.get(k).y*scale));
+        commands = append(commands, "G0 Z"+ (layer*layerheight) +" X"+  (this.knitting.get(k).x*scale) + " Y"+ (this.knitting.get(k).y*scale));
       }
       else{
         v = PVector.sub(this.knitting.get(k-1), this.knitting.get(k));
@@ -109,12 +109,12 @@ class GenKnitting{
     String[] tostart = {};
     if(gcode.speed != speed){
       gcode.speed = speed;
-      tostart = append(tostart, "G1 F" + gcode.speed);
+      tostart = append(tostart, "G0 F" + gcode.speed);
     }
     PVector v = PVector.sub(grid.last, this.knitting.get(0));
     v.mult(scale);
     gcode.extrude += v.mag() * layerheight * thickness;
-    tostart = append(tostart, "G1 Z"+ (layer*layerheight) +" X"+  (this.knitting.get(0).x*scale) + " Y"+ (this.knitting.get(0).y*scale)  );
+    tostart = append(tostart, "G0 Z"+ (layer*layerheight) +" X"+  (this.knitting.get(0).x*scale) + " Y"+ (this.knitting.get(0).y*scale)  );
     
     return tostart;
   }

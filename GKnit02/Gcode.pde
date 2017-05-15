@@ -35,20 +35,22 @@ class Gcode{
      this.commands = append(this.commands, "M117 Printing...");
     
    }
-   void endCode(boolean stop){
+   
+   void endCode(){
      this.commands = append(this.commands, ";end code");
      
      this.commands = append(this.commands, "G91                      ;relative positioning");
      this.commands = append(this.commands, "G1 F300                  ;retract the filament a bit before lifting the nozzle, to release some of the pressure");
-     if(stop == true){
+     
        this.commands = append(this.commands, "M104 S0                      ;extruder heater off");
        this.commands = append(this.commands, "M140 S0                      ;heated bed heater off");
-     }
+     
      this.commands = append(this.commands, "G1 Z+2 F2000                 ;move Z up a bit and retract filament even more");
      this.commands = append(this.commands, "G28 X0 Y0                    ;move X/Y to min endstops, so the head is out of the way");                            
      this.commands = append(this.commands, "M84                          ;steppers off");
      this.commands = append(this.commands, "G90                          ;absolute positioning");
    }
+    
    void save(String name){
       saveStrings(name + ".gcode", this.commands);
    } 

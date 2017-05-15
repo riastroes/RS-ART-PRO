@@ -21,7 +21,7 @@ class Gcode{
      this.commands = append(this.commands, "M109 T0 S210.000000");
      this.commands = append(this.commands, "T0");
     
-     this.commands = append(this.commands, "M190 S60           ;bed temperature on"); //<>//
+     this.commands = append(this.commands, "M190 S60           ;bed temperature on"); //<>// //<>//
      this.commands = append(this.commands, "M109 S210          ;extruder temperature on");
      this.commands = append(this.commands, "G21                ;metric values");
      this.commands = append(this.commands, "G90                ;absolute positioning");
@@ -33,6 +33,13 @@ class Gcode{
      this.commands = append(this.commands, "G1 F200 E3              ;extrude 3mm of feed stock");
      this.commands = append(this.commands, "G92 E0                  ;zero the extruded length again");
      this.commands = append(this.commands, "M117 Printing...");
+    
+   }
+   void startCodeLutsbot(){
+     this.commands = append(this.commands, ";start code");
+     this.commands = append(this.commands, "M107");
+     this.commands = append(this.commands, "G10");
+    
     
    }
    void endCode(boolean stop){
@@ -48,6 +55,14 @@ class Gcode{
      this.commands = append(this.commands, "G28 X0 Y0                    ;move X/Y to min endstops, so the head is out of the way");                            
      this.commands = append(this.commands, "M84                          ;steppers off");
      this.commands = append(this.commands, "G90                          ;absolute positioning");
+   }
+    void endCodeLutsbot(boolean stop){
+     this.commands = append(this.commands, ";end code");
+     
+     this.commands = append(this.commands, "G10                      ;");
+     this.commands = append(this.commands, "M107                     ;fan off");
+     this.commands = append(this.commands, "M104 S0                  ;extruder heater off");
+     
    }
    void save(String name){
       saveStrings(name + ".gcode", this.commands);

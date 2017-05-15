@@ -22,7 +22,7 @@ void setup(){
   
   background(255);
   knitting = new GenKnitting(new PVector(5,5,0),5);
-  knitting.createRow(0, "aaaaaab"); //<>//
+  knitting.createRow(0, "aaaaaab"); //<>// //<>//
   knitting.createRow(1, "dcccccc");
   knitting.createRow(2, "efffffg");
   knitting.createRow(3, "dcccccc");
